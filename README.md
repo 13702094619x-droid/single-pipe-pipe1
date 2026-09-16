@@ -1,4 +1,4 @@
-# Single-Pipe SAS Pipe1 Case
+# Single-Pipe Pipe1 Case
 
 This repository contains the single-pipe heating-network case used for the
 SAS/FDM comparison in the local `SAS_Pipe1.m` workflow.
