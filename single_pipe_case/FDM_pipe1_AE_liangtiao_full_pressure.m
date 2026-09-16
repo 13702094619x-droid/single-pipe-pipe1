@@ -38,13 +38,6 @@ script_dir = fileparts(mfilename('fullpath'));
 if isempty(script_dir)
     script_dir = pwd;
 end
-time_col = w(:);
-time_hour = time_col/3600;
-NCI_source_raw = NCI_source_base ...
-    + NCI_wave_amp1*sin(2*pi*time_hour/NCI_wave_period1) ...
-    + NCI_wave_amp2*sin(2*pi*time_hour/NCI_wave_period2 + pi/5) ...
-    + NCI_wave_amp3*sin(2*pi*time_hour/NCI_wave_period3 + pi/3);
-NCI_source = NCI_source_min + (NCI_source_raw-min(NCI_source_raw))/(max(NCI_source_raw)-min(NCI_source_raw))*(NCI_source_max-NCI_source_min);
 
 %% 3 设置分段数
 length_yu = mod(data_L,delta_x);
@@ -69,6 +62,8 @@ end
 if height(singlepipe) < time_steps
     error('single pipe.xlsx 数据行数不足：需要 %d 行，实际只有 %d 行。', time_steps, height(singlepipe));
 end
+[NCI_source,NCI_source_name] = load_nci_source_boundary(data_file,w(:));
+fprintf('NCI入口边界来源：%s\n', NCI_source_name);
 
 p_out_file = fullfile(script_dir, sprintf('P_out_%d.mat', delta_x));
 if exist(p_out_file,'file') ~= 2

@@ -7,7 +7,9 @@ SAS/FDM comparison in the local `SAS_Pipe1.m` workflow.
 
 - `single_pipe_case/`
   - MATLAB scripts for the single-pipe SAS and FDM calculations.
-  - `single pipe.xlsx`, the local boundary input table.
+  - `single pipe.xlsx`, the local boundary input table, including inlet flow,
+    inlet temperature, outlet/initial temperature, and the inlet `NCI_source`
+    boundary condition.
   - `P_out_*.mat` and `T_out_300.mat`, pressure/temperature boundary inputs used by the scripts.
 - `supplementary_data/`
   - `BC_case_DHN-1.xlsx`, copied from the paper supplementary data.
@@ -47,6 +49,20 @@ SAS_Pipe1
 ```
 
 Generated result files such as `SAS_Pipe1_NCI_results.mat` are ignored by Git.
+
+## NCI Boundary
+
+`single_pipe_case/single pipe.xlsx` includes an explicit inlet NCI boundary
+column:
+
+```text
+NCI_source
+```
+
+The value series follows the original waveform used inside the scripts, scaled
+to the range `0.2` to `0.3`. The MATLAB helper
+`single_pipe_case/load_nci_source_boundary.m` reads this column first. If the
+column is missing, it falls back to the historical default waveform.
 
 ## Source Note
 

@@ -25,6 +25,8 @@ T_in0=90.1724638 + 273.15;
 T_out0=90.10096985 + 273.15;
 w=0:delta_t:t_end;
 ww=0:90:t_end;
+[NCI_source_boundary,NCI_source_boundary_name] = load_nci_source_boundary(data_file,w(:));
+fprintf('SAS-NCI入口边界来源：%s\n', NCI_source_boundary_name);
 mass_reference_file = fullfile(script_dir,'FDM_pipe1_AE_liangtiao_temperature.mat');
 M_in_source_time = w(:);
 M_in_source_name = 'single pipe.xlsx';
@@ -360,22 +362,7 @@ end
 beta_NCI = data_X_NCI*k_loss;
 
 time_steps = length(w);
-if fdm_nci_reference_loaded
-    fdm_source_time = (0:length(fdm_nci_data.NCI_source)-1)'*delta_t;
-    if isfield(fdm_nci_data,'w')
-        fdm_source_time = fdm_nci_data.w(:);
-    end
-    NCI_source_sas = interp1(fdm_source_time,fdm_nci_data.NCI_source(:),w(:),'linear','extrap');
-else
-    NCI_source_min = 0.25;          % 备用入口NCI最小值
-    NCI_source_max = 0.30;          % 备用入口NCI最大值
-    NCI_source_period = 21600;      % 备用入口NCI波动周期/s
-    NCI_source_phase = 0;           % 备用入口NCI相位/rad
-    NCI_source_base = (NCI_source_min+NCI_source_max)/2;
-    NCI_source_amp = (NCI_source_max-NCI_source_min)/2;
-    NCI_source_sas = NCI_source_base ...
-        + NCI_source_amp*sin(2*pi*w(:)/NCI_source_period+NCI_source_phase);
-end
+NCI_source_sas = NCI_source_boundary(:);
 pipe_segment_length = delta_x*ones(1,deta_h_zheng);
 if length_yu ~= 0
     pipe_segment_length(end) = length_yu;

@@ -147,12 +147,8 @@ w=0:delta_t:t_end;%创建时间点数组：[0, 180, 360, ..., 75600]
               %共421个时间点（0到75600秒，步长180秒）
               %用于后续绘图的x轴坐标
 time_col = w(:);
-time_hour = time_col/3600;
-NCI_source_raw = NCI_source_base ...
-    + NCI_wave_amp1*sin(2*pi*time_hour/NCI_wave_period1) ...
-    + NCI_wave_amp2*sin(2*pi*time_hour/NCI_wave_period2 + pi/5) ...
-    + NCI_wave_amp3*sin(2*pi*time_hour/NCI_wave_period3 + pi/3);
-NCI_source = NCI_source_min + (NCI_source_raw-min(NCI_source_raw))/(max(NCI_source_raw)-min(NCI_source_raw))*(NCI_source_max-NCI_source_min);
+[NCI_source,NCI_source_name] = load_nci_source_boundary(data_file,w(:));
+fprintf('NCI入口边界来源：%s\n', NCI_source_name);
 
     %每段的末端温度储存矩
 T_out=zeros(time_steps,deta_h_zheng); 
