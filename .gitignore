@@ -1,0 +1,12 @@
+.DS_Store
+*.asv
+*.inspect.ndjson
+
+# Generated MATLAB result files
+single_pipe_case/FDM_pipe1_liangtiao_temperature.mat
+single_pipe_case/FDM_pipe1_liangtiao_dynamic_hydraulic.mat
+single_pipe_case/FDM_pipe1_AE_liangtiao_temperature.mat
+single_pipe_case/FDM_pipe1_AE_liangtiao_carbon.mat
+single_pipe_case/FDM_pipe1_AE_liangtiao_full_pressure_temperature.mat
+single_pipe_case/FDM_pipe1_AE_liangtiao_full_pressure_carbon.mat
+single_pipe_case/SAS_Pipe1_NCI_results.mat
