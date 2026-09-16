@@ -2,7 +2,7 @@
 *.asv
 *.inspect.ndjson
 
-# Generated MATLAB result files
+# Generated MATLAB result files for local runs
 single_pipe_case/FDM_pipe1_liangtiao_temperature.mat
 single_pipe_case/FDM_pipe1_liangtiao_dynamic_hydraulic.mat
 single_pipe_case/FDM_pipe1_AE_liangtiao_temperature.mat
